@@ -33,10 +33,10 @@ const createWindow = () => {
     resizable: true,
     webPreferences: {
       nodeIntegration: true,
-      additionalArguments: ['--token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZSI6Img0dSIsImRlc2NyaXB0aW9uIjoiZm9yIGFjY2VzcyBRNFUgYXBpIiwiUVVFVUVfQ0VOVEVSX1RPUElDIjoicXVldWUvY2VudGVyIiwiU0VSVklDRV9QT0lOVF9UT1BJQyI6InF1ZXVlL3NlcnZpY2UtcG9pbnQiLCJERVBBUlRNRU5UX1RPUElDIjoicXVldWUvZGVwYXJ0bWVudCIsIkdST1VQX1RPUElDIjoicXVldWUvZ3JvdXAiLCJOT1RJRllfVVNFUiI6InE0dSIsIk5PVElGWV9QQVNTV09SRCI6IiMjcTR1IyMiLCJOT1RJRllfU0VSVkVSIjoiMTI3LjAuMC4xIiwiTk9USUZZX1BPUlQiOiI4ODg4IiwiU1BFQUtfU0lOR0xFIjoiWSIsImlhdCI6MTYwNjE5ODg5NSwiZXhwIjoxNjM3NzU2NDk1fQ.eFtbVsXyKBjP21Ba5UmuawkJhMWpcn3-sldm3F4yHXo','--clinic_code=1000','--apiUrl=http://localhost/api/v1']
+      additionalArguments: process.argv
     }
   });
-
+  // ['--token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3N1ZSI6Img0dSIsImRlc2NyaXB0aW9uIjoiZm9yIGFjY2VzcyBRNFUgYXBpIiwiUVVFVUVfQ0VOVEVSX1RPUElDIjoicXVldWUvY2VudGVyIiwiU0VSVklDRV9QT0lOVF9UT1BJQyI6InF1ZXVlL3NlcnZpY2UtcG9pbnQiLCJERVBBUlRNRU5UX1RPUElDIjoicXVldWUvZGVwYXJ0bWVudCIsIkdST1VQX1RPUElDIjoicXVldWUvZ3JvdXAiLCJOT1RJRllfVVNFUiI6InE0dSIsIk5PVElGWV9QQVNTV09SRCI6IiMjcTR1IyMiLCJOT1RJRllfU0VSVkVSIjoiMTI3LjAuMC4xIiwiTk9USUZZX1BPUlQiOiI4ODg4IiwiU1BFQUtfU0lOR0xFIjoiWSIsImlhdCI6MTYwNjE5ODg5NSwiZXhwIjoxNjM3NzU2NDk1fQ.eFtbVsXyKBjP21Ba5UmuawkJhMWpcn3-sldm3F4yHXo','--clinic_code=1000','--apiUrl=http://localhost/api/v1']
   // and load the index.html of the app.
   mainWindow.loadURL(`file://${__dirname}/login.html`);
 

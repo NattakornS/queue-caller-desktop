@@ -289,10 +289,11 @@ $(document).ready(async function () {
         var result = servicePoints.find(el=>el.local_code === config.clinic_code)
         if (result) {
           console.log(result);
-          $("#slServicePoints").val(result.service_point_id);
+          $("#slServicePoints").val(result.service_point_id).change();
+          $("#slServicePoints").attr('disabled','disabled')
         }
       }
-    }, 500);
+    }, 200);
   }
 
   function renderListWaiting(data) {

@@ -34,7 +34,7 @@ var doLogin = async function (username, password) {
             }
 
             var decoded = jwt_decode(data.token);
-
+            console.log(decoded);
             sessionStorage.setItem('token', data.token);
             sessionStorage.setItem('servicePoints', JSON.stringify(data.servicePoints));
 
@@ -44,7 +44,7 @@ var doLogin = async function (username, password) {
             sessionStorage.setItem('NOTIFY_USER', decoded.NOTIFY_USER);
             sessionStorage.setItem('SERVICE_POINT_TOPIC', decoded.SERVICE_POINT_TOPIC);
             sessionStorage.setItem('QUEUE_CENTER_TOPIC', decoded.QUEUE_CENTER_TOPIC);
-            sessionStorage.setItem('FULLNAME', decoded.fullname);
+            sessionStorage.setItem('FULLNAME', decoded.fullname || '');
 
             location.href = './index.html';
           } else {
@@ -98,7 +98,7 @@ $(document).ready(async () => {
     sessionStorage.setItem('NOTIFY_USER', decoded.NOTIFY_USER);
     sessionStorage.setItem('SERVICE_POINT_TOPIC', decoded.SERVICE_POINT_TOPIC);
     sessionStorage.setItem('QUEUE_CENTER_TOPIC', decoded.QUEUE_CENTER_TOPIC);
-    sessionStorage.setItem('FULLNAME', decoded.fullname);
+    sessionStorage.setItem('FULLNAME', decoded.fullname || 'WUH-Q4U');
 
     location.href = './index.html';
   }
