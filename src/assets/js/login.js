@@ -1,4 +1,5 @@
 var doLogin = async function (username, password) {
+  // if (to)
   if (username && password) {
     Swal.fire({
       title: 'กรุณารอซักครู่...',
@@ -67,7 +68,40 @@ var doLogin = async function (username, password) {
   }
 }
 
-$(document).ready(() => {
+$(document).ready(async () => {
+
+  console.log(window.process.argv);
+  var config = {}
+  window.process.argv.forEach(e=>{
+    let option = e.split('=')
+    if(option.length > 1) {
+      config[option[0].replace('--','')] = option[1] 
+    }
+  })
+  console.log(config);
+  if(config.apiUrl) {
+    localStorage.setItem('apiUrl', config.apiUrl);
+  }
+
+  if (config.token && config.apiUrl) {
+    sessionStorage.setItem('token', config.token);
+    var decoded = jwt_decode(config.token);
+
+    var _url = `${config.apiUrl}/service-points`;    
+    var rs = await axios.get(_url, { headers: { "Authorization": `Bearer ${config.token}` } } );
+    var data = rs.data;
+    console.log(data);
+    sessionStorage.setItem('servicePoints', JSON.stringify(data.results));
+    sessionStorage.setItem('NOTIFY_PASSWORD', decoded.NOTIFY_PASSWORD);
+    sessionStorage.setItem('NOTIFY_PORT', decoded.NOTIFY_PORT);
+    sessionStorage.setItem('NOTIFY_SERVER', decoded.NOTIFY_SERVER);
+    sessionStorage.setItem('NOTIFY_USER', decoded.NOTIFY_USER);
+    sessionStorage.setItem('SERVICE_POINT_TOPIC', decoded.SERVICE_POINT_TOPIC);
+    sessionStorage.setItem('QUEUE_CENTER_TOPIC', decoded.QUEUE_CENTER_TOPIC);
+    sessionStorage.setItem('FULLNAME', decoded.fullname);
+
+    location.href = './index.html';
+  }
 
   var loginEmail = localStorage.getItem('loginUsername');
 

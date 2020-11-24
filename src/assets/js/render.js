@@ -2,6 +2,13 @@
 $(document).ready(async function () {
 
   var CLIENT;
+  var config = {}
+  window.process.argv.forEach(e=>{
+    let option = e.split('=')
+    if(option.length > 1) {
+      config[option[0].replace('--','')] = option[1] 
+    }
+  })
   var servicePoints = await getServicePoints();
   setServicePoints();
 
@@ -16,6 +23,13 @@ $(document).ready(async function () {
   var IS_OFFLINE = false;
   var DEFAULT_PRIORITY;
   var IS_COMPLETE;
+
+
+  console.log(config);
+
+  if (config.token) {
+    sessionStorage.setItem('token', config.token);
+  }
 
   async function getServicePoints() {
     var _servicePoints = sessionStorage.getItem('servicePoints');
@@ -260,12 +274,25 @@ $(document).ready(async function () {
     slTransferServicePoints.empty();
 
     $.each(servicePoints, (k, v) => {
+      var selected = ''
+      // if (v.local_code === config.clinic_code) {
+      //   selected=`selected="selected"`
+      // }
       var html = `
-        <option value="${v.service_point_id}">${v.service_point_name}</option>
+        <option value="${v.service_point_id}" ${selected}>${v.service_point_name}</option>
       `;
 
       slTransferServicePoints.append(html);
     });
+    setTimeout(() => {
+      if (config.clinic_code) {
+        var result = servicePoints.find(el=>el.local_code === config.clinic_code)
+        if (result) {
+          console.log(result);
+          $("#slServicePoints").val(result.service_point_id);
+        }
+      }
+    }, 500);
   }
 
   function renderListWaiting(data) {
